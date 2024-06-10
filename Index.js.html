@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:#d30a;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .completed {
+            text-decoration: line-through;
+        }
+        .button{
+          margin: 15vw;
+        }
+    </style>
+</head>
+<body>
+
+<h2>TODO LIST</h2>
+
+<form id="todoForm">
+    <input type="text" id="taskInput" placeholder="Enter task...">
+    <button type="submit">Add Task</button>
+</form>
+
+<ul id="taskList">
+    <!-- Tasks will be dynamically added here -->
+</ul>
+
+<script>
+    document.getElementById('todoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var taskInput = document.getElementById('taskInput');
+        var taskText = taskInput.value.trim();
+        if (taskText !== '') {
+            addTask(taskText);
+            taskInput.value = '';
+        }
+    });
+
+    function addTask(taskText) {
+        var taskList = document.getElementById('taskList');
+        var li = document.createElement('li');
+        li.textContent = taskText;
+        var completeButton = document.createElement('button');
+        completeButton.textContent = 'Complete';
+        completeButton.addEventListener('click', function() {
+            li.classList.toggle('completed');
+        });
+        var removeButton = document.createElement('button');
+        removeButton.textContent = 'x';
+        removeButton.addEventListener('click', function() {
+            li.remove();
+        });
+        li.appendChild(completeButton);
+        li.appendChild(removeButton);
+        taskList.appendChild(li);
+    }
+</script>
+
+</body>
+</html>
+
